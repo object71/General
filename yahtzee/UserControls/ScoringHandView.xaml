@@ -1,0 +1,41 @@
+﻿<UserControl x:Class="yahtzee.UserControls.ScoringHandView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:ui="clr-namespace:yahtzee.UserControls"
+             mc:Ignorable="d" 
+             d:DesignHeight="50" d:DesignWidth="375">
+    <Grid Name="mainGrid"  Background="White" Margin="2">
+
+        <Grid.Resources>
+            <ui:PipsToImageConverter x:Key="PipsToImageConverter"></ui:PipsToImageConverter>
+            <ui:BoolToOppositeBoolConverter x:Key="BoolTooppositeBoolConverter"></ui:BoolToOppositeBoolConverter>
+        </Grid.Resources>
+        
+        
+        <Grid.ColumnDefinitions>
+            
+            <ColumnDefinition Width="130"></ColumnDefinition>
+            <ColumnDefinition Width="100"></ColumnDefinition>
+            <ColumnDefinition Width="45"></ColumnDefinition>
+            <ColumnDefinition Width="45"></ColumnDefinition>
+            <ColumnDefinition Width="45"></ColumnDefinition>
+            
+        </Grid.ColumnDefinitions>
+
+        <TextBlock Grid.Column="0" Text="{Binding Name}" FontSize="20" FontWeight="Bold" HorizontalAlignment="Right" Margin="5" VerticalAlignment="Center"></TextBlock>
+
+        <Image  Source="{Binding BasePip, Converter={StaticResource PipsToImageConverter}}" x:Name="dice" Grid.Column="1" RenderOptions.BitmapScalingMode="Fant" Stretch="Fill"  
+                Height="40" Width="40" Margin="10,0" HorizontalAlignment="Left"></Image>
+
+        <TextBlock Grid.Column="2" Text="{Binding Score, Mode=TwoWay}" FontSize="20" FontWeight="SemiBold" Foreground="Red" Margin="5" VerticalAlignment="Center" HorizontalAlignment="Right"></TextBlock>
+        
+        <TextBlock Grid.Column="3" Text="{Binding LockedScore}" FontSize="20" FontWeight="SemiBold" Foreground="Gray" Margin="5" VerticalAlignment="Center" HorizontalAlignment="Right"></TextBlock>
+
+        <Button Name="lockClick" Grid.Column="4" Margin="8" Content="Lock" Click="lockClick_Click" IsEnabled="{Binding Locked, Converter={StaticResource BoolTooppositeBoolConverter}}">
+            
+        </Button>
+        
+    </Grid>
+</UserControl>
